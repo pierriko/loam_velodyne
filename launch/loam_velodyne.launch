@@ -2,7 +2,10 @@
 
   <arg name="rviz" default="true" />
 
-  <node pkg="loam_velodyne" type="scanRegistration" name="scanRegistration" output="screen"/>
+  <node pkg="loam_velodyne" type="scanRegistration" name="scanRegistration" output="screen">
+      <remap from="/velodyne_points" to="/scan_velodyne_front" />
+      <remap from="/imu/data" to="/mti_node/imu/data" />
+  </node>
 
   <node pkg="loam_velodyne" type="laserOdometry" name="laserOdometry" output="screen" respawn="true">
   </node>
