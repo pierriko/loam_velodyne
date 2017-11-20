@@ -318,19 +318,19 @@ void laserOdometryHandler(const nav_msgs::Odometry::ConstPtr& laserOdometry)
   newLaserOdometry = true;
 }
 
-void imuHandler(const sensor_msgs::Imu::ConstPtr& imuIn)
-{
-  double roll, pitch, yaw;
-  tf::Quaternion orientation;
-  tf::quaternionMsgToTF(imuIn->orientation, orientation);
-  tf::Matrix3x3(orientation).getRPY(roll, pitch, yaw);
-
-  imuPointerLast = (imuPointerLast + 1) % imuQueLength;
-
-  imuTime[imuPointerLast] = imuIn->header.stamp.toSec();
-  imuRoll[imuPointerLast] = roll;
-  imuPitch[imuPointerLast] = pitch;
-}
+// void imuHandler(const sensor_msgs::Imu::ConstPtr& imuIn)
+// {
+//   double roll, pitch, yaw;
+//   tf::Quaternion orientation;
+//   tf::quaternionMsgToTF(imuIn->orientation, orientation);
+//   tf::Matrix3x3(orientation).getRPY(roll, pitch, yaw);
+// 
+//   imuPointerLast = (imuPointerLast + 1) % imuQueLength;
+// 
+//   imuTime[imuPointerLast] = imuIn->header.stamp.toSec();
+//   imuRoll[imuPointerLast] = roll;
+//   imuPitch[imuPointerLast] = pitch;
+// }
 
 int main(int argc, char** argv)
 {
@@ -349,7 +349,7 @@ int main(int argc, char** argv)
   ros::Subscriber subLaserCloudFullRes = nh.subscribe<sensor_msgs::PointCloud2> 
                                          ("/velodyne_cloud_3", 2, laserCloudFullResHandler);
 
-  ros::Subscriber subImu = nh.subscribe<sensor_msgs::Imu> ("/imu/data", 50, imuHandler);
+  // ros::Subscriber subImu = nh.subscribe<sensor_msgs::Imu> ("/imu/data", 50, imuHandler);
 
   ros::Publisher pubLaserCloudSurround = nh.advertise<sensor_msgs::PointCloud2> 
                                          ("/laser_cloud_surround", 1);
@@ -1100,4 +1100,3 @@ int main(int argc, char** argv)
 
   return 0;
 }
-

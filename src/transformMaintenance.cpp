@@ -35,7 +35,6 @@
 #include <loam_velodyne/common.h>
 #include <nav_msgs/Odometry.h>
 #include <ros/ros.h>
-#include <sensor_msgs/Imu.h>
 #include <tf/transform_datatypes.h>
 #include <tf/transform_broadcaster.h>
 
